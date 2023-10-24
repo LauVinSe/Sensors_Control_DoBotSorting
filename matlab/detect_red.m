@@ -1,28 +1,34 @@
 function [highlighted_img, centroids, r] = detect_red(img)
-    hI = rgb2hsv(img);
-    hImage1 = hI(:, :, 1);
-    sImage1 = hI(:, :, 2);
-    vImage1 = hI(:, :, 3);
+    % Convert the input image to HSV color space
+    hsv_img = rgb2hsv(img);
 
-    % Define your color thresholds for red
-    hueTL1 = 0.029; hueTH1 = 0.98;
-    saturationTL1 = 0.39; saturationTH1 = 1;
-    valueTL1 = 0.01; valueTH1 = 1;
+    % Extract the Hue, Saturation, and Value channels
+    h = hsv_img(:, :, 1);
+    s = hsv_img(:, :, 2);
+    v = hsv_img(:, :, 3);
 
-    % Create masks for red color
-    hueMaskRed1 = (hImage1 <= hueTL1) | (hImage1 >= hueTH1);
-    saturationMaskRed1 = (sImage1 >= saturationTL1) & (sImage1 <= saturationTH1);
-    valueMaskRed1 = (vImage1 >= valueTL1) & (vImage1 <= valueTH1);
-    redObjectsMask1 = hueMaskRed1 & saturationMaskRed1 & valueMaskRed1;
+    % Define the red color thresholds in HSV
+    hue_lower_threshold = 0;    
+    hue_upper_threshold = 0.1;   
+    saturation_lower_threshold = 0.6; 
+    value_lower_threshold = 0.5;   
+    
+    % Create masks for red color detection
+    hue_mask = (h >= hue_lower_threshold) & (h <= hue_upper_threshold);
+    saturation_mask = (s >= saturation_lower_threshold);
+    value_mask = (v >= value_lower_threshold);
 
-    % Fill holes, erode, and dilate the mask
-    out2 = imfill(redObjectsMask1, 'holes');
-    out3 = bwmorph(out2, 'erode', 2);
-    out3 = bwmorph(out3, 'dilate', 3);
-    out3 = imfill(out3, 'holes');
+     % Combine the masks to detect red regions
+    red_mask = hue_mask & saturation_mask & value_mask;
+
+    % Perform morphological operations on the red mask
+    red_mask = imfill(red_mask, 'holes');
+    red_mask = bwmorph(red_mask, 'erode', 2);
+    red_mask = bwmorph(red_mask, 'dilate', 3);
+    red_mask = imfill(red_mask, 'holes');
 
     % Find connected components and region properties
-    stats = regionprops(out3, 'Centroid');
+    stats = regionprops(red_mask, 'Centroid');
     
     if isempty(stats)
         r = 0;
@@ -33,14 +39,20 @@ function [highlighted_img, centroids, r] = detect_red(img)
     end
 
     % Highlight the detected regions
-    imgBoth = imoverlay(img, out3);
+    imgBoth = imoverlay(img, red_mask);
 
-    % Highlight each centroid with a blue color
+    % Highlight each centroid with a marker and show coordinates
     if r == 1
         for i = 1:size(centroids, 1)
+            % Draw the marker
             imgBoth = insertMarker(imgBoth, centroids(i, :), 'x', 'color', 'blue', 'size', 10);
+            
+            % Annotate the centroid position
+            positionText = sprintf('(%d, %d)', round(centroids(i, 1)), round(centroids(i, 2)));
+            imgBoth = insertText(imgBoth, centroids(i, :), positionText, 'FontSize', 12, 'BoxColor', 'yellow', 'BoxOpacity', 0.8, 'TextColor', 'black');
         end
     end
 
+    % Return the resulting image and the flag indicating red detection
     highlighted_img = imgBoth;
 end
