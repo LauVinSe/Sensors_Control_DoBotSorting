@@ -7,7 +7,7 @@ Group members:
 - Marcus Yam (24441988)
 
 ## Project Description
-Our project integrates the Intel Real Sense D435i RGBD Camera with the DoBot Magician Robot to execute a color-sorting task. The primary objective is to identify, categorize by colour, and subsequently pick up and sort objects, in this case, boxes.
+Our project integrates the Intel Real Sense D435i RGBD Camera with the DoBot Magician Robot to execute a color-sorting task. The objective is to identify, sort by colour, and then pick up and sort objects, in this case, boxes.
 
 ## Workflow
 1. **Object Recognition:** Using the camera, the system first detects the boxes on the platform.
