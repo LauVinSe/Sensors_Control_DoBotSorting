@@ -1,10 +1,6 @@
 # Sensors_Control_DoBotSorting
 ## 41014 Sensors and Control for Mechatronic Systems - UTS
 
-
-![IMG_3202](https://github.com/LauVinSe/Sensors_Control_DoBotSorting/assets/145846272/b9fe1198-ae75-4db6-8563-bc508ec7a852)
-
-
 Group members:
 - Laurentius Setiadharma (14018295)
 - Rio Setyo (14089371)
