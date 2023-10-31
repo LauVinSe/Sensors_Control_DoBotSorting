@@ -1,6 +1,10 @@
 # Sensors_Control_DoBotSorting
 ## 41014 Sensors and Control for Mechatronic Systems - UTS
 
+
+![IMG_3202](https://github.com/LauVinSe/Sensors_Control_DoBotSorting/assets/145846272/b9fe1198-ae75-4db6-8563-bc508ec7a852)
+
+
 Group members:
 - Laurentius Setiadharma (14018295)
 - Rio Setyo (14089371)
@@ -21,4 +25,9 @@ Our project integrates the Intel Real Sense D435i RGBD Camera with the DoBot Mag
 6. **Frame of Reference Transformation:** Before sending the data to the robot, the system adjusts the 3D coordinates to align with the robot's frame of reference. This step ensures that the robot interacts accurately with the boxes.
 
 7. **Robot Control:** Finally, with all the required data, the DoBot Magician Robot picks up the box and sorts it based on its colour.
+
+## Used Toolbox or Package
+- Peter Corkes modified (by UTS) - MATLAB Robotics Toolbox - v10.4 (20230730)
+- DoBot Magician packages - (https://github.com/gapaul/dobot_magician_driver/wiki/Instructions-For-Native-Linux)
+- Intel RealSense D435i package - (https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md)
 
