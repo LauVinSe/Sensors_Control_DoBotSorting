@@ -10,10 +10,8 @@ Group members:
 Our project integrates the Intel Real Sense D435i RGBD Camera with the DoBot Magician Robot to execute a color-sorting task. The primary objective is to identify, categorize by colour, and subsequently pick up and sort objects, in this case, boxes.
 
 ## Workflow
-1.** Object Recognition:** Using the camera, the system first detects the boxes on the platform.
-
-2. **Color Filtering: **Once the boxes are identified, the system categorizes them based on their colour.
-
+1. **Object Recognition:** Using the camera, the system first detects the boxes on the platform.
+2. **Color Filtering:** Once the boxes are identified, the system categorizes them based on their colour.
 3. **Centroid Calculation:** After the desired colour is detected, the system determines the object's centroid. This central point serves as a reference for the next stages.
 
 4. **Depth Sensing:** Utilizing the centroid of the box, the system then maps the depth value from the depth image.
